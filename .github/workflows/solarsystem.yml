@@ -1,0 +1,54 @@
+name: Containerize_Deploy
+on:
+  push:
+    branches: 
+      - main
+      - 'features/*'
+jobs:
+  buid_test:
+   runs-on: ubuntu-latest
+   steps:
+      - name: git checkout code
+        uses: actions/checkout@v4
+      
+      - name: setup nodejs version 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 
+
+      - name: install dependencies 
+        run: npm install 
+
+      - name: unit testing
+        run: npm test
+
+      - name: upload artifact file 
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: test-results.xml
+    
+  coverage_test:
+   runs-on: ubuntu-latest
+   steps:
+      - name: git checkout code
+        uses: actions/checkout@v4
+      
+      - name: setup nodejs version 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 
+
+      - name: install dependencies 
+        run: npm install 
+
+      - name: unit testing
+        run: npm run coverage 
+
+      - name: upload artifact file 
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-result 
+          path: coverage
+          retention-days: 5 
+          
