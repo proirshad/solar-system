@@ -10,6 +10,8 @@ jobs:
    services:
       mongo:
         image: mongo:6
+        ports:
+          - 27017:27017
    env:
       MONGO_URI: mongodb://mongo:27017/testdb
    steps:
@@ -38,6 +40,8 @@ jobs:
    services:
       mongo:
         image: mongo:6
+        ports:
+          - 27017:27017
    env:
       MONGO_URI: mongodb://mongo:27017/testdb
    steps:
