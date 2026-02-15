@@ -31,6 +31,13 @@ jobs:
 
       - name: install package 
         run: npm install 
+        
+      - name: Wait for MongoDB
+        run: |
+          until nc -z localhost 27017; do
+          echo "Waiting for MongoDB..."
+          sleep 2
+          done
 
       - name: unit testing
         run: npm test
@@ -63,7 +70,12 @@ jobs:
         run: npm install 
         env:
           MONGO_URI: mongodb://localhost:27017/testdb
-
+      - name: Wait for MongoDB
+        run: |
+          until nc -z localhost 27017; do
+          echo "Waiting for MongoDB..."
+          sleep 5
+          done
       - name: unit testing
         run: npm run coverage
         env:
