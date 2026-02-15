@@ -13,7 +13,7 @@ jobs:
         ports:
           - 27017:27017
    env:
-      MONGO_URI: mongodb://mongo:27017/testdb
+      MONGO_URI: mongodb://localhost:27017/testdb
    steps:
       - name: git checkout code
         uses: actions/checkout@v4
@@ -49,7 +49,7 @@ jobs:
         ports:
           - 27017:27017
    env:
-      MONGO_URI: mongodb://mongo:27017/testdb
+      MONGO_URI: mongodb://localhost:27017/testdb
    steps:
       - name: git checkout code
         uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
       - name: install dependencies 
         run: npm install 
         env:
-          MONGO_URI: mongodb://mongo:27017/testdb
+          MONGO_URI: mongodb://localhost:27017/testdb
 
       - name: unit testing
         run: npm run coverage
